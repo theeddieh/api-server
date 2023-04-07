@@ -1,4 +1,4 @@
-# The Yummly Take Home Test
+# The ****** Take Home Test
 
 ### Pre-requisites
 
@@ -19,8 +19,8 @@ project root directory.
 The connection information:
 ```
 User: postgres
-Pass: postgres
-DB: yummly
+Pass: *******
+DB: ******
 Schema: public
 ```
 
@@ -38,7 +38,7 @@ Tables:
 3. `dietary_restrictions`
 4. `favorite_ingredients`
 
-These four tables work together to model a simple version of a Yummly user with some taste preferences,
+These four tables work together to model a simple version of a ****** user with some taste preferences,
 dietary restrictions, and allergies. The DB will enforce a few constraints like not allowing duplicate
 allergies for a given user, but not much else.
 
