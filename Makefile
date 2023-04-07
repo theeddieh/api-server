@@ -4,7 +4,7 @@ VERSION = "v1"
 ENV_VARS = "makefile environmental variable"
 
 api-build:
-	docker build --tag ${REPO}:${VERSION} .
+	docker build . --file Dockerfile --tag ${REPO}:${VERSION}
 
 api-run:
 	docker run --interactive --tty --env TEST_ENV=${ENV_VARS} ${REPO}:${VERSION}
@@ -14,6 +14,12 @@ api-start:
 
 api-stop:
 	docker compose --file docker-compose-API.yaml down --volumes
+
+go-build:
+	go build -v ./...
+
+go-run:
+	go run main.go
 
 list:
 	docker container ls
@@ -26,4 +32,6 @@ db-start:
 db-stop:
 	docker compose --file docker-compose-DB.yaml down --volumes
 
+clean:
+	rm jubilant-tribble
 
