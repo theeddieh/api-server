@@ -9,13 +9,17 @@ import (
 )
 
 func main() {
-        fmt.Println("API server starting up")
+        fmt.Println("api-server starting up")
         fmt.Println(os.Getenv("TEST_ENV"))
         
-        app.New()
+        app := app.New()
         
-        fmt.Println("API listening...")
-        err := http.ListenAndServe(":9000", nil)
+        fmt.Println("attaching router")
+        http.HandleFunc("/", app.Router.ServeHTTP)
+
+        fmt.Println("listening on port 8080...")
+
+        err := http.ListenAndServe(":8080", nil)
         if err != nil {
                 log.Println(err)
                 os.Exit(1)

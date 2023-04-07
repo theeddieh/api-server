@@ -21,6 +21,9 @@ go-build:
 go-run:
 	go run main.go
 
+go-test:
+	go test -v ./...
+
 list:
 	docker container ls
 	docker context ls

@@ -10,7 +10,8 @@ type App struct {
 }
 
 func New() *App {
-	fmt.Println("Initializing app")
+	fmt.Println("initializing app")
+	
 	a := &App{
 		Router: mux.NewRouter(),
 	}
@@ -20,6 +21,8 @@ func New() *App {
 }
 
 func (a *App) initRoutes() {
-	fmt.Println("Initializing handler for route: /")
+	fmt.Println("initializing handlers")
+
 	a.Router.HandleFunc("/", a.IndexHandler()).Methods("GET")
+	a.Router.HandleFunc("/chef", a.GetChefHandler()).Methods("GET")
 }
