@@ -1,0 +1,10 @@
+package app
+
+import (
+	"encoding/json"
+	"net/http"
+)
+
+func parseRequestBody(w http.ResponseWriter, r *http.Request, d interface{}) error {
+	return json.NewDecoder(r.Body).Decode(d)
+}

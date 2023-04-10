@@ -28,5 +28,6 @@ func (a *App) initRoutes() {
 	fmt.Println("initializing handlers")
 
 	a.Router.HandleFunc("/", a.IndexHandler()).Methods("GET")
+	a.Router.HandleFunc("/chefs", a.GetChefsHandler()).Methods("GET")
 	a.Router.HandleFunc("/chef", a.GetChefHandler()).Methods("GET")
 }

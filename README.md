@@ -91,4 +91,4 @@ What we want returned is something that looks like:
 - we have a DB spun up via docker compose, so I think we should match that structure, an api server started via docker-compose
 - so I'll need a binary to implemetnt the server, and then wire that up to start with the db
 - ideally, to validate the test, you'd still only need to run `docker-compose up -d` and the rest takes care of itself
-- 
+- on the server side,the "business logic" will be transforming the db lookups intojson responses

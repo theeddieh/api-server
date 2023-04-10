@@ -1,6 +1,7 @@
 package database
 
 import (
+	"api-server/models"
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
@@ -10,30 +11,41 @@ import (
 type PostgresDB interface {
 	Open() error
 	Close() error
+	GetUsers() ([]*models.User, error)
 }
 
 type DB struct {
-	host     string // localhost
-	port     string // 8080
-	user     string // postgres
-	password string // postgres
-	name     string // yummly
-	scheme   string // public
+	host       string // localhost
+	port       int    // 8080
+	user       string // postgres
+	password   string // postgres
+	name       string // yummly
+	scheme     string // public
+	connection string
 
 	db *sqlx.DB
 }
 
 func New() *DB {
-	fmt.Println("initializing databse")
+	fmt.Println("initializing database")
 
 	db := &DB{
 		host:     "localhost",
-		port:     "8080",
+		port:     5432,
 		user:     "postgres",
 		password: "postgres",
 		name:     "yummly",
 		scheme:   "public",
 	}
+
+	c := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		db.host,
+		db.port,
+		db.user,
+		db.password,
+		db.name)
+
+	db.connection = c
 
 	return db
 
@@ -41,9 +53,10 @@ func New() *DB {
 
 func (d *DB) Open() error {
 
-	connectionString := ""
+	fmt.Println("opening connection to postgres")
+	fmt.Println(d.connection)
 
-	p, err := sqlx.Open("postgres", connectionString)
+	p, err := sqlx.Open("postgres", d.connection)
 
 	if err != nil {
 		return err
@@ -51,9 +64,27 @@ func (d *DB) Open() error {
 
 	d.db = p
 
+	fmt.Println("pinging postgres")
+	err = d.db.Ping()
+	if err != nil {
+		return err
+	}
+	fmt.Println("connected to postgres")
+
 	return nil
 }
 
 func (d *DB) Close() error {
-	return nil
+	fmt.Println("closing postgres connection")
+	return d.db.Close()
+}
+
+func (d *DB) GetUsers() ([]*models.User, error) {
+	var chefs []*models.User
+
+	query := "SELECT * FROM users"
+
+	err := d.db.Select(&chefs, query)
+
+	return chefs, err
 }
