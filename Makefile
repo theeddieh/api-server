@@ -16,7 +16,7 @@ api-stop:
 	docker compose --file docker-compose-API.yaml down --volumes
 
 go-build:
-	go build -v ./...
+	go build -o api-server -v main.go 
 
 go-run:
 	go run main.go
@@ -36,5 +36,5 @@ db-stop:
 	docker compose --file docker-compose-DB.yaml down --volumes
 
 clean:
-	rm jubilant-tribble
+	rm api-server
 

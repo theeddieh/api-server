@@ -1,22 +1,26 @@
 package app
 
 import (
+	"api-server/database"
 	"fmt"
+
 	"github.com/gorilla/mux"
 )
 
 type App struct {
 	Router *mux.Router
+	DB     database.PostgresDB
 }
 
 func New() *App {
 	fmt.Println("initializing app")
-	
+
 	a := &App{
 		Router: mux.NewRouter(),
 	}
 
 	a.initRoutes()
+
 	return a
 }
 

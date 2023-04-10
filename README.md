@@ -1,5 +1,7 @@
 # The ****** Take Home Test
 
+## Test
+
 ### Pre-requisites
 
 1. Docker & Docker Compose
@@ -69,3 +71,24 @@ What we want returned is something that looks like:
     "favoriteIngredients": ["oat milk", "rutabaga", "onion"]
 }
 ```
+
+## Working Notes
+
+### Links
+
+- https://github.com/golang-standards/project-layout
+- https://github.com/dhax/go-base
+- https://github.com/go-swagger/go-swagger
+- https://github.com/docker/awesome-compose
+- https://the-stack-overflow-podcast.simplecast.com/episodes/building-an-api-is-half-the-battle-qa-with-marco-palladino-from-kong/transcript
+- https://dev.to/lucasnevespereira/write-a-rest-api-in-golang-following-best-practices-pe9
+- https://medium.com/golang-learn/go-project-layout-e5213cdcfaa2
+- https://www.calhoun.io/connecting-to-a-postgresql-database-with-gos-database-sql-package/
+- 
+
+### Notes
+
+- we have a DB spun up via docker compose, so I think we should match that structure, an api server started via docker-compose
+- so I'll need a binary to implemetnt the server, and then wire that up to start with the db
+- ideally, to validate the test, you'd still only need to run `docker-compose up -d` and the rest takes care of itself
+- 
