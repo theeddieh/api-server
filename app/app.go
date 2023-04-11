@@ -28,6 +28,14 @@ func (a *App) initRoutes() {
 	fmt.Println("initializing handlers")
 
 	a.Router.HandleFunc("/", a.IndexHandler()).Methods("GET")
+	a.Router.HandleFunc("/healthcheck", a.HealthCheckHandler()).Methods("GET")
+
 	a.Router.HandleFunc("/chefs", a.GetChefsHandler()).Methods("GET")
-	a.Router.HandleFunc("/chef", a.GetChefHandler()).Methods("GET")
+	a.Router.HandleFunc("/chef/{uuid}", a.GetChefHandler()).Methods("GET")
+
+	a.Router.HandleFunc("/allergies/{uuid}", a.GetAllergiesHandler()).Methods("GET")
+
+	a.Router.HandleFunc("/dietaryRestrictions/{uuid}", a.GetDietaryRestrictionsHandler()).Methods("GET")
+
+	a.Router.HandleFunc("/favoriteIngredients/{uuid}", a.GetFavoriteIngredientsHandler()).Methods("GET")
 }

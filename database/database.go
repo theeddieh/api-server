@@ -11,7 +11,11 @@ import (
 type PostgresDB interface {
 	Open() error
 	Close() error
-	GetUsers() ([]*models.User, error)
+	GetChefs() ([]*models.User, error)
+	GetChef(id string) (*models.User, error)
+	GetAllergies(id string) ([]*models.Allergy, error)
+	GetDietaryRestrictions(id string) ([]*models.DietaryRestriction, error)
+	GetFavoriteIngredients(id string) ([]*models.FavoriteIngredient, error)
 }
 
 type DB struct {
@@ -77,14 +81,4 @@ func (d *DB) Open() error {
 func (d *DB) Close() error {
 	fmt.Println("closing postgres connection")
 	return d.db.Close()
-}
-
-func (d *DB) GetUsers() ([]*models.User, error) {
-	var chefs []*models.User
-
-	query := "SELECT * FROM users"
-
-	err := d.db.Select(&chefs, query)
-
-	return chefs, err
 }
