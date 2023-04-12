@@ -6,15 +6,15 @@ import (
 	"testing"
 )
 
-func TestHealthCheckHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/health-check", nil)
+func TestIndexHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rr := httptest.NewRecorder()
 
-	handler := http.HandlerFunc(HealthCheckHandler)
+	handler := http.HandlerFunc(IndexHandler())
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
@@ -22,7 +22,7 @@ func TestHealthCheckHandler(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `{"alive": true}`
+	expected := "api-server root"
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)

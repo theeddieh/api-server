@@ -27,8 +27,8 @@ func New() *App {
 func (a *App) initRoutes() {
 	fmt.Println("initializing handlers")
 
-	a.Router.HandleFunc("/", a.IndexHandler()).Methods("GET")
-	a.Router.HandleFunc("/healthcheck", a.HealthCheckHandler()).Methods("GET")
+	a.Router.HandleFunc("/", IndexHandler()).Methods("GET")
+	a.Router.HandleFunc("/healthcheck", HealthCheckHandler()).Methods("GET")
 
 	a.Router.HandleFunc("/chefs", a.GetChefsHandler()).Methods("GET")
 	a.Router.HandleFunc("/chef/{uuid}", a.GetChefHandler()).Methods("GET")

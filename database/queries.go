@@ -2,12 +2,9 @@ package database
 
 import (
 	"api-server/models"
-	"fmt"
 )
 
 func (d *DB) GetChef(id string) (*models.User, error) {
-
-	fmt.Println("checf: ", id)
 
 	users, err := d.GetChefs()
 	if err != nil {

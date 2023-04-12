@@ -8,15 +8,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func (a *App) IndexHandler() http.HandlerFunc {
+func IndexHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Add("Content-Type", "text/plain")
-		fmt.Fprintln(w, "api-server root")
+		fmt.Fprintf(w, "api-server root")
 	}
 }
 
-func (a *App) HealthCheckHandler() http.HandlerFunc {
+func HealthCheckHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		m := make(map[string]bool)
 		m["alive"] = true
