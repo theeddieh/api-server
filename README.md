@@ -34,7 +34,9 @@ To run:
 
 1. build the image for the api-sever `make docker-build`
 2. run containers: `make up` or `docker-compose up -d`
-3. validate api:
+3. validate api: `./test.sh`
+
+e.g.
 
 ```
 curl http://localhost:8080/healthcheck
