@@ -34,7 +34,7 @@ func New() *DB {
 	fmt.Println("initializing database")
 
 	db := &DB{
-		host:     "localhost",
+		host:     "postgresdb",
 		port:     5432,
 		user:     "postgres",
 		password: "postgres",
@@ -61,8 +61,8 @@ func (d *DB) Open() error {
 	fmt.Println(d.connection)
 
 	p, err := sqlx.Open("postgres", d.connection)
-
 	if err != nil {
+		fmt.Println("error connection: ", err)
 		return err
 	}
 
@@ -71,6 +71,7 @@ func (d *DB) Open() error {
 	fmt.Println("pinging postgres")
 	err = d.db.Ping()
 	if err != nil {
+		fmt.Println("error pinging: ", err)
 		return err
 	}
 	fmt.Println("connected to postgres")
