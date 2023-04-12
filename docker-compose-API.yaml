@@ -1,6 +1,0 @@
-version: '3'
-services:
-  api-server:
-    build: .
-    environment:
-      - TEST_ENV="docker compose environmental variable"
