@@ -9,9 +9,11 @@ import (
 	"os"
 )
 
+var version string
+
 func main() {
 	fmt.Println("api-server starting up")
-	fmt.Println("TEST_ENV: ", os.Getenv("TEST_ENV"))
+	fmt.Println("version: ", version)
 
 	app := app.New()
 	app.DB = database.New()
@@ -19,6 +21,7 @@ func main() {
 	err := app.DB.Open()
 	if err != nil {
 		log.Println(err)
+		os.Exit(1)
 	} else {
 		defer app.DB.Close()
 	}
