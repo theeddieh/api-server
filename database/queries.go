@@ -5,7 +5,6 @@ import (
 	"fmt"
 )
 
-// func (d *DB) GetChefDetails(id string) (*models.User, error) {
 func (d *DB) GetChef(id string) (*models.User, error) {
 
 	fmt.Println("checf: ", id)
@@ -15,17 +14,17 @@ func (d *DB) GetChef(id string) (*models.User, error) {
 		return nil, err
 	}
 
-	allergies, err := d.GetAllergies(id)
+	allergies, err := d.GetAllergies()
 	if err != nil {
 		return nil, err
 	}
 
-	restrictions, err := d.GetDietaryRestrictions(id)
+	restrictions, err := d.GetDietaryRestrictions()
 	if err != nil {
 		return nil, err
 	}
 
-	favorites, err := d.GetFavoriteIngredients(id)
+	favorites, err := d.GetFavoriteIngredients()
 	if err != nil {
 		return nil, err
 	}
@@ -34,8 +33,6 @@ func (d *DB) GetChef(id string) (*models.User, error) {
 
 	// find user
 	for _, u := range users {
-		fmt.Println(u.ID)
-
 		if u.ID == id {
 			user = u
 		}
@@ -43,34 +40,33 @@ func (d *DB) GetChef(id string) (*models.User, error) {
 
 	// "join" other fields
 	for _, a := range allergies {
-		fmt.Println(a.ID, " : ", a.Allergy)
 		if a.ID == id {
 			user.Allergies = append(user.Allergies, a.Allergy)
 		}
 	}
 	for _, r := range restrictions {
-		fmt.Println(r.ID, " : ", r.Restriction)
 		if r.ID == id {
 			user.DietaryRestrictions = append(user.DietaryRestrictions, r.Restriction)
 		}
 	}
 	for _, f := range favorites {
-		fmt.Println(f.ID, " : ", f.Ingredient)
 		if f.ID == id {
 			user.FavoriteIngredients = append(user.FavoriteIngredients, f.Ingredient)
 		}
 	}
+
+	// zero out to hide from JSON response
 	user.CreatedAt = ""
 	user.UpdatedAt = ""
+
 	return user, nil
 }
 
 func (d *DB) GetChefs() ([]*models.User, error) {
 
 	var u []*models.User
-	query := "SELECT * FROM users"
 
-	err := d.db.Select(&u, query)
+	err := d.db.Select(&u, "SELECT * FROM users")
 	if err != nil {
 		return nil, err
 	}
@@ -78,27 +74,9 @@ func (d *DB) GetChefs() ([]*models.User, error) {
 	return u, nil
 }
 
-// func (d *DB) GetChef(id string) (*models.User, error) {
-
-// 	var u *models.User
-// 	query := fmt.Sprintf("SELECT * FROM users WHERE id = %s ", id)
-
-// 	fmt.Println(query)
-
-// 	err := d.db.Select(&u, query)
-// 	if err != nil {
-// 		fmt.Println(err)
-// 		return u, err
-// 	}
-
-// 	return u, nil
-// }
-
-func (d *DB) GetAllergies(id string) ([]*models.Allergy, error) {
+func (d *DB) GetAllergies() ([]*models.Allergy, error) {
 
 	var a []*models.Allergy
-	// fmt.Println(id)
-	// query := fmt.Sprintf("SELECT * FROM \"allergies\" WHERE user_id = %s", id)
 
 	err := d.db.Select(&a, "SELECT * FROM allergies")
 	if err != nil {
@@ -108,12 +86,11 @@ func (d *DB) GetAllergies(id string) ([]*models.Allergy, error) {
 	return a, nil
 }
 
-func (d *DB) GetDietaryRestrictions(id string) ([]*models.DietaryRestriction, error) {
+func (d *DB) GetDietaryRestrictions() ([]*models.DietaryRestriction, error) {
 
 	var dr []*models.DietaryRestriction
-	query := fmt.Sprintf("SELECT * FROM dietary_restrictions")
 
-	err := d.db.Select(&dr, query)
+	err := d.db.Select(&dr, "SELECT * FROM dietary_restrictions")
 	if err != nil {
 		return nil, err
 	}
@@ -121,12 +98,11 @@ func (d *DB) GetDietaryRestrictions(id string) ([]*models.DietaryRestriction, er
 	return dr, nil
 }
 
-func (d *DB) GetFavoriteIngredients(id string) ([]*models.FavoriteIngredient, error) {
+func (d *DB) GetFavoriteIngredients() ([]*models.FavoriteIngredient, error) {
 
 	var fi []*models.FavoriteIngredient
-	query := fmt.Sprintf("SELECT * FROM favorite_ingredients")
 
-	err := d.db.Select(&fi, query)
+	err := d.db.Select(&fi, "SELECT * FROM favorite_ingredients")
 	if err != nil {
 		return nil, err
 	}

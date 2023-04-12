@@ -71,10 +71,7 @@ func (a *App) GetAllergiesHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
 
-		vars := mux.Vars(r)
-		uuid := vars["uuid"]
-
-		c, err := a.DB.GetAllergies(uuid)
+		c, err := a.DB.GetAllergies()
 		if err != nil {
 			sendErrorResponse(w, r, err)
 		} else {
@@ -90,10 +87,7 @@ func (a *App) GetDietaryRestrictionsHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
 
-		vars := mux.Vars(r)
-		uuid := vars["uuid"]
-
-		c, err := a.DB.GetDietaryRestrictions(uuid)
+		c, err := a.DB.GetDietaryRestrictions()
 		if err != nil {
 			sendErrorResponse(w, r, err)
 		} else {
@@ -109,10 +103,7 @@ func (a *App) GetFavoriteIngredientsHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
 
-		vars := mux.Vars(r)
-		uuid := vars["uuid"]
-
-		c, err := a.DB.GetFavoriteIngredients(uuid)
+		c, err := a.DB.GetFavoriteIngredients()
 		if err != nil {
 			sendErrorResponse(w, r, err)
 		} else {

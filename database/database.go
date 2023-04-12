@@ -13,9 +13,9 @@ type PostgresDB interface {
 	Close() error
 	GetChefs() ([]*models.User, error)
 	GetChef(id string) (*models.User, error)
-	GetAllergies(id string) ([]*models.Allergy, error)
-	GetDietaryRestrictions(id string) ([]*models.DietaryRestriction, error)
-	GetFavoriteIngredients(id string) ([]*models.FavoriteIngredient, error)
+	GetAllergies() ([]*models.Allergy, error)
+	GetDietaryRestrictions() ([]*models.DietaryRestriction, error)
+	GetFavoriteIngredients() ([]*models.FavoriteIngredient, error)
 }
 
 type DB struct {

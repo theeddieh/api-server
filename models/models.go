@@ -11,8 +11,6 @@ type User struct {
 	FavoriteIngredients []string `json:"favoriteIngredients,omitempty"`
 	CreatedAt           string   `db:"created_at" json:",omitempty"`
 	UpdatedAt           string   `db:"updated_at" json:",omitempty"`
-	// CreatedAt           time.Time `db:"created_at" json:",omitempty"`
-	// UpdatedAt           time.Time `db:"updated_at" json:",omitempty"`
 }
 
 type Allergy struct {

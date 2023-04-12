@@ -33,9 +33,7 @@ func (a *App) initRoutes() {
 	a.Router.HandleFunc("/chefs", a.GetChefsHandler()).Methods("GET")
 	a.Router.HandleFunc("/chef/{uuid}", a.GetChefHandler()).Methods("GET")
 
-	a.Router.HandleFunc("/allergies/{uuid}", a.GetAllergiesHandler()).Methods("GET")
-
-	a.Router.HandleFunc("/dietaryRestrictions/{uuid}", a.GetDietaryRestrictionsHandler()).Methods("GET")
-
-	a.Router.HandleFunc("/favoriteIngredients/{uuid}", a.GetFavoriteIngredientsHandler()).Methods("GET")
+	a.Router.HandleFunc("/allergies", a.GetAllergiesHandler()).Methods("GET")
+	a.Router.HandleFunc("/dietaryRestrictions", a.GetDietaryRestrictionsHandler()).Methods("GET")
+	a.Router.HandleFunc("/favoriteIngredients", a.GetFavoriteIngredientsHandler()).Methods("GET")
 }
